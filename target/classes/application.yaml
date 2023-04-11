@@ -1,0 +1,13 @@
+spring.camunda.datasource.jdbcUrl: jdbc:h2:file:./camunda-h2-database
+spring.h2.console.enabled : true
+spring.h2.console.path : /h2
+camunda.bpm.admin-user:
+  id: demo
+  password: demo
+  
+server.port: 9100
+
+#mysql db setup
+#spring.customerdata.datasource.jdbcUrl: jdbc:mysql://localhost:3306/customerdata
+#spring.customerdata.datasource.username: root
+#spring.customerdata.datasource.password: Purna@1967@

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1a1wrmn" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.12.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.15.0">
+  <bpmn:process id="payments" name="Payments" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_006nlen</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_006nlen" sourceRef="StartEvent_1" targetRef="Activity_070n0hy" />
+    <bpmn:endEvent id="Event_09vdy43">
+      <bpmn:incoming>Flow_1yuiq1y</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_1yuiq1y" sourceRef="Activity_00jlc83" targetRef="Event_09vdy43" />
+    <bpmn:userTask id="Activity_00jlc83" name="Payment Completion">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="paymentStatus" label="Payment Status" type="enum">
+            <camunda:value id="completed" name="Completed" />
+            <camunda:value id="processing" name="Processing" />
+            <camunda:value id="failed" name="Failed" />
+          </camunda:formField>
+          <camunda:formField id="totalAmount" label="Total amount" type="long" defaultValue="${totalPrice}">
+            <camunda:validation>
+              <camunda:constraint name="readonly" config="readonly" />
+            </camunda:validation>
+          </camunda:formField>
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_18ert2j</bpmn:incoming>
+      <bpmn:outgoing>Flow_1yuiq1y</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_18ert2j" sourceRef="Activity_070n0hy" targetRef="Activity_00jlc83" />
+    <bpmn:serviceTask id="Activity_070n0hy" name="Payment Caluclation" camunda:delegateExpression="${calculatePaymentDelegate}">
+      <bpmn:incoming>Flow_006nlen</bpmn:incoming>
+      <bpmn:outgoing>Flow_18ert2j</bpmn:outgoing>
+    </bpmn:serviceTask>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="payments">
+      <bpmndi:BPMNEdge id="Flow_006nlen_di" bpmnElement="Flow_006nlen">
+        <di:waypoint x="215" y="117" />
+        <di:waypoint x="260" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1yuiq1y_di" bpmnElement="Flow_1yuiq1y">
+        <di:waypoint x="510" y="117" />
+        <di:waypoint x="572" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_18ert2j_di" bpmnElement="Flow_18ert2j">
+        <di:waypoint x="360" y="117" />
+        <di:waypoint x="410" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="179" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_09vdy43_di" bpmnElement="Event_09vdy43">
+        <dc:Bounds x="572" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_17ndx97_di" bpmnElement="Activity_00jlc83">
+        <dc:Bounds x="410" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0i1pio3_di" bpmnElement="Activity_070n0hy">
+        <dc:Bounds x="260" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
