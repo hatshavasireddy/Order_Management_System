@@ -17,6 +17,7 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 //	extends WebSecurityConfigurerAdapter 
 
+	// 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
 	@Bean
 	public SecurityFilterChain appSecurity(HttpSecurity http) throws Exception {
 		http
